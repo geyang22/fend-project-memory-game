@@ -43,8 +43,10 @@ const allCards = document.querySelectorAll('.card');
 let cards = [];
 
 allCards.forEach(function(card){
+
   card.addEventListener('click',function(e){
-// making sure no more than two cards get clicked
+    // condition for when a card is clicked twice
+    if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
     card.classList.add('open','show');
     cards.push(card);
     console.log(cards.length);
@@ -56,6 +58,7 @@ allCards.forEach(function(card){
         });
         cards = [];
       }, 1000);
+    };
     };
 });
 });
