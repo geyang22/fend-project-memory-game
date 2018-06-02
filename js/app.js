@@ -39,10 +39,25 @@ function shuffle(array) {
  */
 
 // flipping the cards on a click
-var allCards = document.querySelectorAll('.card');
+const allCards = document.querySelectorAll('.card');
+let cardNumb = 0;
 
 allCards.forEach(function(card){
   card.addEventListener('click',function(e){
+// making sure no more than two cards get clicked
+    if(cardNumb < 2) {
     card.classList.add('open','show');
-  });
+    cardNumb ++;
+    console.log(cardNumb);
+  };
 });
+});
+
+
+// Steps:
+// making the cards flip on click
+// making sure just two cards flip
+// and that they're hidden once clicked
+// prevent same from happpening when a card gets clicked twice
+// what happens when there's a match
+// create the deck programatically
