@@ -40,16 +40,23 @@ function shuffle(array) {
 
 // flipping the cards on a click
 const allCards = document.querySelectorAll('.card');
-let cardNumb = 0;
+let cards = [];
 
 allCards.forEach(function(card){
   card.addEventListener('click',function(e){
 // making sure no more than two cards get clicked
-    if(cardNumb < 2) {
     card.classList.add('open','show');
-    cardNumb ++;
-    console.log(cardNumb);
-  };
+    cards.push(card);
+    console.log(cards.length);
+// Hide if no match
+    if(cards.length == 2){
+      setTimeout(function () {
+        cards.forEach(function(card){
+          card.classList.remove('open','show');
+        });
+        cards = [];
+      }, 1000);
+    };
 });
 });
 
