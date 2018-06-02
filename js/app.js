@@ -1,3 +1,4 @@
+
 /*
  * Create a list that holds all of your cards
  */
@@ -36,3 +37,12 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+// flipping the cards on a click
+var allCards = document.querySelectorAll('.card');
+
+allCards.forEach(function(card){
+  card.addEventListener('click',function(e){
+    card.classList.add('open','show');
+  });
+});
