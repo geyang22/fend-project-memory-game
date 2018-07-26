@@ -33,19 +33,83 @@ function shuffle(array) {
     return array;
 }
 
+function gameStart () {
+// Number of moves reset  to zero
+const moves = document.querySelector('.moves');
+let num = 0;
+moves.innerHTML = num;
+
+const list = document.querySelector('.deck');
+//Remove the current deck
+if (!(list.childNodes.length===0)){
+console.log(true);
+while (list.firstChild) {
+    list.removeChild(list.firstChild);
+}
+console.log(list);
+shuffle(deck);
+createDeck();
+}
+
+else{
 // Shuffle the deck
 shuffle(deck);
-
+createDeck();
+}
 // Loop through each card and create its HTML
-  deck.forEach(function(card){
-    const list = document.querySelector('.deck');
+function createDeck (){
+deck.forEach(function(card){
     const item = document.createElement('li');
     list.appendChild(item);
     item.className = "card";
     const item1 = document.createElement('i');
     item.appendChild(item1);
-    item1.classList.add ("fa", card);  
+    item1.classList.add ("fa", card);
   });
+}
+
+// flipping the cards on a click
+const allCards = document.querySelectorAll('.card');
+let cards = [];
+
+allCards.forEach(function(card){
+
+  card.addEventListener('click',function(e){
+    // Update number of Moves
+    num += 1
+    moves.innerHTML = num;
+    // condition for when a card is clicked twice
+    if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
+    card.classList.add('open','show');
+    cards.push(card);
+    console.log(cards.length);
+    // Leave open in case of match
+    if(cards.length == 2){
+      const card1 = cards[0];
+      const card2 = cards[1];
+      if(card1.childNodes[0].classList[1]===card2.childNodes[0].classList[1]){
+          card1.classList.add('match');
+          card2.classList.add('match');
+          console.log('match');
+          cards = [];
+      }
+      // Hide if no match
+      else {
+      console.log(cards[0].childNodes[0].classList[1]);
+      setTimeout(function () {
+        cards.forEach(function(card){
+          card.classList.remove('open','show');
+        });
+        cards = [];
+      }, 1000);
+    }
+    };
+    };
+});
+});
+}
+
+gameStart();
 
 
 /*
@@ -59,36 +123,10 @@ shuffle(deck);
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-// flipping the cards on a click
-const allCards = document.querySelectorAll('.card');
-let cards = [];
 
-allCards.forEach(function(card){
-
-  card.addEventListener('click',function(e){
-    // condition for when a card is clicked twice
-    if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
-    card.classList.add('open','show');
-    cards.push(card);
-    console.log(cards.length);
-// Hide if no match
-    if(cards.length == 2){
-      setTimeout(function () {
-        cards.forEach(function(card){
-          card.classList.remove('open','show');
-        });
-        cards = [];
-      }, 1000);
-    };
-    };
+// Restart button
+const restart = document.querySelector('.restart');
+restart.addEventListener('click', function(e){
+  gameStart();
+  console.log('restart');
 });
-});
-
-
-// Steps:
-// making the cards flip on click
-// making sure just two cards flip
-// and that they're hidden once clicked
-// prevent same from happpening when a card gets clicked twice
-// what happens when there's a match
-// create the deck programatically
