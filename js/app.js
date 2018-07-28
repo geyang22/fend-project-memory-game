@@ -33,6 +33,8 @@ function shuffle(array) {
     return array;
 }
 
+let num = "";
+
 function gameStart () {
 // Number of moves reset  to zero
 const moves = document.querySelector('.moves');
@@ -75,14 +77,11 @@ let cards = [];
 allCards.forEach(function(card){
 
   card.addEventListener('click',function(e){
-    // Update number of Moves
-    num += 1
-    moves.innerHTML = num;
     // condition for when a card is clicked twice
     if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
     card.classList.add('open','show');
     cards.push(card);
-    console.log(cards.length);
+    // console.log(cards.length);
     // Leave open in case of match
     if(cards.length == 2){
       const card1 = cards[0];
@@ -95,7 +94,6 @@ allCards.forEach(function(card){
       }
       // Hide if no match
       else {
-      console.log(cards[0].childNodes[0].classList[1]);
       setTimeout(function () {
         cards.forEach(function(card){
           card.classList.remove('open','show');
@@ -104,6 +102,19 @@ allCards.forEach(function(card){
       }, 1000);
     }
     };
+    // Update number of Moves
+    num += 1
+    moves.innerHTML = num;
+
+    // Stars rating
+    const stars = document.querySelectorAll('.fa-star');
+    if (num>20 && num<31) {
+      stars[2].style.display = "none";
+    }
+    else if (num>30) {
+      stars[2].style.display = "none";
+      stars[1].style.display = "none";
+    }
     };
 });
 });
@@ -122,6 +133,9 @@ gameStart();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+
+
 
 
 // Restart button
