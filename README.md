@@ -18,3 +18,6 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## How to Play the Game
+The player clicks two cards. When a card is clicked, the image on a card is uncovered. The task is to find eight pairs of matching images. When two matching images are found, the cards remain flipped. The game ends when all of the matches are found (all cards stay flipped). The time is counted and the star rating assigned depending on the number of moves it took to win the game. The goal is to use minimal time and number of moves.
