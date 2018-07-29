@@ -1,4 +1,5 @@
 
+
 /*
  * Create a list that holds all of your cards
  */
@@ -9,7 +10,7 @@ const deck = ['fa-diamond', 'fa-diamond',
 'fa-cube', 'fa-cube',
 'fa-leaf', 'fa-leaf',
 'fa-bicycle', 'fa-bicycle',
-'fa-bomb', 'fa-bomb']
+'fa-bomb', 'fa-bomb'];
 
 /*
  * Display the cards on the page
@@ -37,18 +38,19 @@ let num = "";
 
 function gameStart () {
 // Number of moves reset  to zero
-const moves = document.querySelector('.moves');
 let num = 0;
-moves.innerHTML = num;
+// moves.innerHTML = num;
+// Resetting the timer
+// clearInterval(timeCount);
 
 const list = document.querySelector('.deck');
 //Remove the current deck
-if (!(list.childNodes.length===0)){
-console.log(true);
+if (!(list.childNodes.length==0)){
+// console.log(true);
 while (list.firstChild) {
     list.removeChild(list.firstChild);
 }
-console.log(list);
+// console.log(list);
 shuffle(deck);
 createDeck();
 }
@@ -73,10 +75,13 @@ deck.forEach(function(card){
 // flipping the cards on a click
 const allCards = document.querySelectorAll('.card');
 let cards = [];
+// Create an array that stores all the matched cards to check when the game is over
+let match = [];
 
 allCards.forEach(function(card){
 
   card.addEventListener('click',function(e){
+
     // condition for when a card is clicked twice
     if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')){
     card.classList.add('open','show');
@@ -89,7 +94,9 @@ allCards.forEach(function(card){
       if(card1.childNodes[0].classList[1]===card2.childNodes[0].classList[1]){
           card1.classList.add('match');
           card2.classList.add('match');
-          console.log('match');
+          // Push into the array that stores all matched cards to know when the game is over
+          match.push(card1);
+          match.push(card2);
           cards = [];
       }
       // Hide if no match
@@ -101,23 +108,48 @@ allCards.forEach(function(card){
         cards = [];
       }, 1000);
     }
-    };
-    // Update number of Moves
-    num += 1
-    moves.innerHTML = num;
+    }
 
-    // Stars rating
-    const stars = document.querySelectorAll('.fa-star');
-    if (num>20 && num<31) {
-      stars[2].style.display = "none";
-    }
-    else if (num>30) {
-      stars[2].style.display = "none";
-      stars[1].style.display = "none";
-    }
-    };
+
+}
+// Update number of Moves
+num += 1;
+const moves = document.querySelector('.moves');
+moves.innerHTML = num;
+
+// Stars rating
+const stars = document.querySelectorAll('.fa-star');
+if (num>20 && num<31) {
+  stars[2].style.display = "none";
+}
+else if (num>30) {
+  stars[2].style.display = "none";
+  stars[1].style.display = "none";
+}
+
+// Winning
+if (match.length == 16) {
+  stopTimer();
+  document.getElementsByClassName('popup')[0].display = "block";
+}
 });
 });
+}
+
+// Timer setup
+const timeCount = setInterval (count,1000);
+let time = 0;
+let second = "";
+let minute = "";
+function count () {
+    time += 1;
+    second = (time % 60);
+    minute = parseInt(time / 60);
+    document.querySelectorAll('#timer')[0].innerHTML = minute + ":" + second;
+  }
+
+function stopTimer() {
+    clearInterval(timeCount);
 }
 
 gameStart();
