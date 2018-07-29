@@ -39,9 +39,8 @@ let num = "";
 function gameStart () {
 // Number of moves reset  to zero
 let num = 0;
-// moves.innerHTML = num;
-// Resetting the timer
-// clearInterval(timeCount);
+stopTimer();
+const timeCount = setInterval (count,1000);
 
 const list = document.querySelector('.deck');
 //Remove the current deck
@@ -127,14 +126,18 @@ else if (num>30) {
   stars[1].style.display = "none";
 }
 
+
 // Winning
-if (match.length == 16) {
+const popup = document.querySelectorAll('.popup')[0];
+if (match.length == 2) {
   stopTimer();
-  document.getElementsByClassName('popup')[0].display = "block";
+  popup.style.display = "block";
 }
 });
 });
 }
+
+
 
 // Timer setup
 const timeCount = setInterval (count,1000);
@@ -149,11 +152,18 @@ function count () {
   }
 
 function stopTimer() {
-    clearInterval(timeCount);
+    window.clearInterval(timeCount);
 }
 
-gameStart();
 
+// if(num=1){
+//   const timeCount = setInterval (count,1000);
+// }
+// else {
+//   window.clearInterval(timeCount);
+// }
+
+gameStart();
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -174,5 +184,7 @@ gameStart();
 const restart = document.querySelector('.restart');
 restart.addEventListener('click', function(e){
   gameStart();
+  // window.clearInterval(timeCount);
+  // const timeCount = setInterval (count,1000);
   console.log('restart');
 });
