@@ -117,20 +117,30 @@ const moves = document.querySelector('.moves');
 moves.innerHTML = num;
 
 // Stars rating
+let starsCount = "";
 const stars = document.querySelectorAll('.fa-star');
+console.log(stars);
 if (num>20 && num<31) {
   stars[2].style.display = "none";
+  starsCount = 2;
 }
 else if (num>30) {
   stars[2].style.display = "none";
   stars[1].style.display = "none";
+  starsCount = 1;
 }
 
 
 // Winning
 const popup = document.querySelectorAll('.popup')[0];
-if (match.length == 2) {
-  stopTimer();
+const minutes = document.querySelector(".minutes");
+const seconds = document.querySelector(".seconds");
+const starsRating = document.querySelector(".stars");
+if (match.length == 16) {
+  window.clearInterval(timeCount);
+  minutes.innerHTML = minute;
+  seconds.innerHTML = second;
+  starsRating.innerHTML = starsCount;
   popup.style.display = "block";
 }
 });
