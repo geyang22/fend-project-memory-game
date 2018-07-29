@@ -34,37 +34,40 @@ function shuffle(array) {
   return array;
 }
 
-let num = "";
+// Declare variables needed
+const moves = document.querySelector('.moves');
+const stars = document.querySelectorAll('.fa-star');
+const popup = document.querySelectorAll('.popup')[0];
+const list = document.querySelector('.deck');
+// An array that stores all the matched cards to check when the game is over
+let match = [];
 
+// A function to run the game
 function gameStart() {
   // Number of moves reset  to zero
   let num = 0;
-  const timeCount = setInterval(count, 1000);
-  window.clearInterval(timeCount);
+  moves.innerHTML = 0;
+  // Timer reset to 0
   time = 0;
-  second = 0;
-  minute = 0;
+  // Stars reset to 3
+  stars.forEach(function(star) {
+    star.style.display = "block";
+  });
 
 
-  if (num == 1) {
-    const timeCount = setInterval(count, 1000);
-  }
-  const list = document.querySelector('.deck');
-  //Remove the current deck
-  if (!(list.childNodes.length == 0)) {
-    // console.log(true);
+  // Remove the current deck, create a new deck
+  if (list.childNodes.length !== 0) {
     while (list.firstChild) {
       list.removeChild(list.firstChild);
     }
-    // console.log(list);
     shuffle(deck);
     createDeck();
   } else {
-    // Shuffle the deck
     shuffle(deck);
     createDeck();
   }
-  // Loop through each card and create its HTML
+
+  // A function to loop through each card and create its HTML
   function createDeck() {
     deck.forEach(function(card) {
       const item = document.createElement('li');
@@ -76,21 +79,15 @@ function gameStart() {
     });
   }
 
-  // flipping the cards on a click
+  // Flipping the cards on a click
   const allCards = document.querySelectorAll('.card');
   let cards = [];
-  // Create an array that stores all the matched cards to check when the game is over
-  let match = [];
-
   allCards.forEach(function(card) {
-
     card.addEventListener('click', function(e) {
-
-      // condition for when a card is clicked twice
+      // Condition for when a card is clicked twice
       if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
         card.classList.add('open', 'show');
         cards.push(card);
-        // console.log(cards.length);
         // Leave open in case of match
         if (cards.length == 2) {
           const card1 = cards[0];
@@ -116,19 +113,17 @@ function gameStart() {
 
 
       }
+
       // Update number of Moves
       num += 1;
-      const moves = document.querySelector('.moves');
       moves.innerHTML = num;
 
       // Stars rating
-      let starsCount = "";
-      const stars = document.querySelectorAll('.fa-star');
-      console.log(stars);
-      if (num > 20 && num < 31) {
+      let starsCount = 3;
+      if (num > 25 && num < 35) {
         stars[2].style.display = "none";
         starsCount = 2;
-      } else if (num > 30) {
+      } else if (num > 34) {
         stars[2].style.display = "none";
         stars[1].style.display = "none";
         starsCount = 1;
@@ -136,7 +131,6 @@ function gameStart() {
 
 
       // Winning
-      const popup = document.querySelectorAll('.popup')[0];
       const minutes = document.querySelector(".minutes");
       const seconds = document.querySelector(".seconds");
       const starsRating = document.querySelector(".stars");
@@ -151,13 +145,11 @@ function gameStart() {
   });
 }
 
-
-
 // Timer setup
-// const timeCount = setInterval (count,1000);
+const timeCount = setInterval(count, 1000);
 let time = 0;
-let second = 0;
-let minute = 0;
+let second = "";
+let minute = "";
 
 function count() {
   time += 1;
@@ -166,17 +158,6 @@ function count() {
   document.querySelectorAll('#timer')[0].innerHTML = minute + ":" + second;
 }
 
-function stopTimer() {
-  window.clearInterval(timeCount);
-}
-
-
-// if(num=1){
-//   const timeCount = setInterval (count,1000);
-// }
-// else {
-//   window.clearInterval(timeCount);
-// }
 
 gameStart();
 
@@ -192,14 +173,8 @@ gameStart();
  */
 
 
-
-
-
 // Restart button
 const restart = document.querySelector('.restart');
 restart.addEventListener('click', function(e) {
   gameStart();
-  // window.clearInterval(timeCount);
-  // const timeCount = setInterval (count,1000);
-  console.log('restart');
 });
