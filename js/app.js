@@ -39,9 +39,16 @@ let num = "";
 function gameStart () {
 // Number of moves reset  to zero
 let num = 0;
-stopTimer();
 const timeCount = setInterval (count,1000);
+window.clearInterval(timeCount);
+time = 0;
+second = 0;
+minute = 0;
 
+
+if (num == 1) {
+  const timeCount = setInterval (count,1000);
+}
 const list = document.querySelector('.deck');
 //Remove the current deck
 if (!(list.childNodes.length==0)){
@@ -150,10 +157,10 @@ if (match.length == 16) {
 
 
 // Timer setup
-const timeCount = setInterval (count,1000);
+// const timeCount = setInterval (count,1000);
 let time = 0;
-let second = "";
-let minute = "";
+let second = 0;
+let minute = 0;
 function count () {
     time += 1;
     second = (time % 60);
