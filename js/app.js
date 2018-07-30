@@ -139,7 +139,6 @@ function gameStart() {
       const seconds = document.querySelector(".seconds");
       const starsRating = document.querySelector(".stars");
       if (match.length == 2) {
-        window.clearInterval(timeCount);
         minutes.innerHTML = minute;
         seconds.innerHTML = second;
         starsRating.innerHTML = starsCount;
@@ -179,9 +178,6 @@ gameStart();
 const playAgain = document.querySelector('.button');
 playAgain.addEventListener('click', function(e) {
   gameStart();
-  // window.clearInterval(timeCount);
-  // time = 0;
-  // const timeCount = setInterval(count, 1000);
 });
 
 // Restart button
