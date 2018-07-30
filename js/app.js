@@ -53,6 +53,10 @@ function gameStart() {
   stars.forEach(function(star) {
     star.style.display = "block";
   });
+  // Winning popup not showing
+  popup.style.display = "none";
+  // Emptying the match array
+  match = [];
 
 
   // Remove the current deck, create a new deck
@@ -134,7 +138,7 @@ function gameStart() {
       const minutes = document.querySelector(".minutes");
       const seconds = document.querySelector(".seconds");
       const starsRating = document.querySelector(".stars");
-      if (match.length == 16) {
+      if (match.length == 2) {
         window.clearInterval(timeCount);
         minutes.innerHTML = minute;
         seconds.innerHTML = second;
@@ -171,7 +175,14 @@ gameStart();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
+// Play again
+const playAgain = document.querySelector('.button');
+playAgain.addEventListener('click', function(e) {
+  gameStart();
+  // window.clearInterval(timeCount);
+  // time = 0;
+  // const timeCount = setInterval(count, 1000);
+});
 
 // Restart button
 const restart = document.querySelector('.restart');
