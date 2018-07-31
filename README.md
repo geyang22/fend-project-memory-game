@@ -21,3 +21,9 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## How to Play the Game
 The player clicks two cards. When a card is clicked, the image on a card is uncovered. The task is to find eight pairs of matching images. When two matching images are found, the cards remain flipped. The game ends when all of the matches are found (all cards stay flipped). The time is counted and the star rating assigned depending on the number of moves it took to win the game. The goal is to use minimal time and number of moves.
+
+
+## Getting started
+Download the game source code. Dependencies are font-awesome (https://fontawesome.com/), jQuery, and bootstrap.
+
+Open index.html with your browser, the game will start, if not check errors with your browser debugging utility.
